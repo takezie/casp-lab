@@ -29,7 +29,7 @@ sudo pip install docker-compose
 sudo systemctl enable docker && sudo systemctl start docker
 sudo systemctl enable nginx && sudo systemctl start nginx
 sudo mkdir -p /data/projects/$PROJECTNAME/scripts
-chmod 777 /data/projects/$PROJECTNAME/scripts
+sudo chmod 777 /data/projects/$PROJECTNAME/scripts
 sleep 1
 sudo git clone --recursive https://github.com/takezie/docker-recipes.git /data/projects/$PROJECTNAME/$PROJECTNAME-blue
 sudo git clone --recursive https://github.com/takezie/docker-recipes.git /data/projects/$PROJECTNAME/$PROJECTNAME-green
