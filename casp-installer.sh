@@ -40,8 +40,8 @@ sudo sed -i --follow-symlinks "s/"10022:22"/"$BLUESSHPORT:22"/g" /data/projects/
 sudo sed -i --follow-symlinks "s/"8000:80"/"$GREENHTTPPORT:80"/g" /data/projects/$PROJECTNAME/$PROJECTNAME-green/docker-compose.yml
 sudo sed -i --follow-symlinks "s/"8443:443"/"$GREENHTTPSPORT:443"/g" /data/projects/$PROJECTNAME/$PROJECTNAME-green/docker-compose.yml
 sudo sed -i --follow-symlinks "s/"10022:22"/"$GREENSSHPORT:22"/g" /data/projects/$PROJECTNAME/$PROJECTNAME-green/docker-compose.yml
-cd /data/projects/$PROJECTNAME/$PROJECTNAME-green/ && sudo docker-compose build && sudo docker-compose up -d && echo "Starting GREEN things up"'!'
-cd /data/projects/$PROJECTNAME/$PROJECTNAME-blue/ && sudo docker-compose build && sudo docker-compose up -d && echo "Starting BLUE things up"'!'
+cd /data/projects/$PROJECTNAME/$PROJECTNAME-green/ && sudo docker-compose build && sudo docker-compose up -d && clear && echo -e "\e[92mStarted GREEN things up\e[0m"'!'
+cd /data/projects/$PROJECTNAME/$PROJECTNAME-blue/ && sudo docker-compose build && sudo docker-compose up -d && clear && echo -e "\e[94mStarted BLUE things up\e[0m"'!'
 sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx-blue.conf
 sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx-green.conf
 sudo sed -i "48iproxy_read_timeout 180;" /etc/nginx/nginx-blue.conf
@@ -62,8 +62,8 @@ sudo git clone --recursive https://github.com/jrgp/linfo.git /data/projects/$PRO
 sudo git clone --recursive https://github.com/jrgp/linfo.git /data/projects/$PROJECTNAME/$PROJECTNAME-green/app/
 sudo chmod -R 755 /data/projects/$PROJECTNAME/$PROJECTNAME-blue/app
 sudo chmod -R 755 /data/projects/$PROJECTNAME/$PROJECTNAME-green/app
-sudo mv /data/projects/hyze/hyze-blue/app/sample.config.inc.php /data/projects/hyze/hyze-blue/app/config.inc.php
-sudo mv /data/projects/hyze/hyze-green/app/sample.config.inc.php /data/projects/hyze/hyze-green/app/config.inc.php
+sudo mv /data/projects/$PROJECTNAME/$PROJECTNAME-blue/app/sample.config.inc.php /data/projects/$PROJECTNAME/$PROJECTNAME-blue/app/config.inc.php
+sudo mv /data/projects/$PROJECTNAME/$PROJECTNAME-green/app/sample.config.inc.php /data/projects/$PROJECTNAME/$PROJECTNAME-green/app/config.inc.php
 sudo sed -i --follow-symlinks "s/"4a8fd6"/"4ad64a"/g" /data/projects/$PROJECTNAME/$PROJECTNAME-green/app/layout/theme_default.css
 sudo sed -i --follow-symlinks "s/"5c9ada"/"5cda5c"/g" /data/projects/$PROJECTNAME/$PROJECTNAME-green/app/layout/theme_default.css
 sudo echo "cd /etc/nginx/" > /data/projects/$PROJECTNAME/scripts/go-green.sh
