@@ -28,7 +28,8 @@ sudo yum upgrade python*
 sudo pip install docker-compose
 sudo systemctl enable docker && sudo systemctl start docker
 sudo systemctl enable nginx && sudo systemctl start nginx
-sudo mkdir -p /data/projects/$PROJECTNAME
+sudo mkdir -p /data/projects/$PROJECTNAME/scripts
+chmod 777 /data/projects/$PROJECTNAME/scripts
 sleep 1
 sudo git clone --recursive https://github.com/takezie/docker-recipes.git /data/projects/$PROJECTNAME/$PROJECTNAME-blue
 sudo git clone --recursive https://github.com/takezie/docker-recipes.git /data/projects/$PROJECTNAME/$PROJECTNAME-green
@@ -64,11 +65,11 @@ sudo mv /data/projects/hyze/hyze-blue/app/sample.config.inc.php /data/projects/h
 sudo mv /data/projects/hyze/hyze-green/app/sample.config.inc.php /data/projects/hyze/hyze-green/app/config.inc.php
 sudo sed -i --follow-symlinks "s/"4a8fd6"/"4ad64a"/g" /data/projects/$PROJECTNAME/$PROJECTNAME-green/app/layout/theme_default.css
 sudo sed -i --follow-symlinks "s/"5c9ada"/"5cda5c"/g" /data/projects/$PROJECTNAME/$PROJECTNAME-green/app/layout/theme_default.css
-sudo echo "cd /etc/nginx/" > /data/projects/$PROJECTNAME/go-green.sh
-sudo echo "yes | cp  nginx-green.conf nginx.conf" >> /data/projects/$PROJECTNAME/go-green.sh
-sudo echo "service restart nginx" >> /data/projects/$PROJECTNAME/go-green.sh
-sudo chmod +x /data/projects/$PROJECTNAME/go-green.sh
-sudo echo "cd /etc/nginx/" > /data/projects/$PROJECTNAME/go-blue.sh
-sudo echo "yes | cp  nginx-green.conf nginx.conf" >> /data/projects/$PROJECTNAME/go-blue.sh
-sudo echo "service restart nginx" >> /data/projects/$PROJECTNAME/go-blue.sh
-sudo chmod +x /data/projects/$PROJECTNAME/go-blue.sh
+sudo echo "cd /etc/nginx/" > /data/projects/$PROJECTNAME/scripts/go-green.sh
+sudo echo "yes | cp  nginx-green.conf nginx.conf" >> /data/projects/$PROJECTNAME/scripts/go-green.sh
+sudo echo "service restart nginx" >> /data/projects/$PROJECTNAME/scripts/go-green.sh
+sudo chmod +x /data/projects/$PROJECTNAME/scripts/go-green.sh
+sudo echo "cd /etc/nginx/" > /data/projects/$PROJECTNAME/scripts/go-blue.sh
+sudo echo "yes | cp  nginx-green.conf nginx.conf" >> /data/projects/$PROJECTNAME/scripts/go-blue.sh
+sudo echo "service restart nginx" >> /data/projects/$PROJECTNAME/scripts/go-blue.sh
+sudo chmod +x /data/projects/$PROJECTNAME/scripts/go-blue.sh
