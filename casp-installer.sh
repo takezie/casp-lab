@@ -31,7 +31,7 @@ sudo pip install docker-compose
 sudo systemctl enable docker && sudo systemctl start docker
 sudo systemctl enable nginx && sudo systemctl start nginx
 sudo mkdir -p /data/projects/$PROJECTNAME/scripts
-sudo chmod 777 /data/projects/$PROJECTNAME/scripts
+sudo chmod 666 /data/projects/$PROJECTNAME/scripts
 sleep 1
 sudo git clone --recursive https://github.com/takezie/docker-recipes.git /data/projects/$PROJECTNAME/$PROJECTNAME-blue
 sudo git clone --recursive https://github.com/takezie/docker-recipes.git /data/projects/$PROJECTNAME/$PROJECTNAME-green
@@ -41,8 +41,8 @@ sudo sed -i --follow-symlinks "s/"10022:22"/"$BLUESSHPORT:22"/g" /data/projects/
 sudo sed -i --follow-symlinks "s/"8000:80"/"$GREENHTTPPORT:80"/g" /data/projects/$PROJECTNAME/$PROJECTNAME-green/docker-compose.yml
 sudo sed -i --follow-symlinks "s/"8443:443"/"$GREENHTTPSPORT:443"/g" /data/projects/$PROJECTNAME/$PROJECTNAME-green/docker-compose.yml
 sudo sed -i --follow-symlinks "s/"10022:22"/"$GREENSSHPORT:22"/g" /data/projects/$PROJECTNAME/$PROJECTNAME-green/docker-compose.yml
-cd /data/projects/$PROJECTNAME/$PROJECTNAME-green/ && sudo docker-compose build && sudo docker-compose up -d && clear && echo -e "\e[92mStarted GREEN things up\e[0m"'!'
-cd /data/projects/$PROJECTNAME/$PROJECTNAME-blue/ && sudo docker-compose build && sudo docker-compose up -d && clear && echo -e "\e[94mStarted BLUE things up\e[0m"'!'
+cd /data/projects/$PROJECTNAME/$PROJECTNAME-green/ && sudo docker-compose build && sudo docker-compose up -d && echo -e "\e[92mStarted GREEN things up\e[0m"'!'
+cd /data/projects/$PROJECTNAME/$PROJECTNAME-blue/ && sudo docker-compose build && sudo docker-compose up -d && echo -e "\e[94mStarted BLUE things up\e[0m"'!'
 sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx-blue.conf
 sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx-green.conf
 sudo sed -i "48iproxy_read_timeout 180;" /etc/nginx/nginx-blue.conf
@@ -54,9 +54,6 @@ sudo sed -i "48iproxy_send_timeout 120;" /etc/nginx/nginx-green.conf
 sudo sed -i "48iproxy_connect_timeout 120;" /etc/nginx/nginx-green.conf
 sudo sed -i "48iproxy_pass http://$HOSTNAME:$GREENHTTPPORT;" /etc/nginx/nginx-green.conf
 sudo cp /etc/nginx/nginx-blue.conf /etc/nginx/nginx.conf
-sudo service restart nginx
-cd /data/projects/$PROJECTNAME/$PROJECTNAME-green/ && sudo docker-compose restart
-cd /data/projects/$PROJECTNAME/$PROJECTNAME-blue/ && sudo docker-compose restart
 sudo rm -rf /data/projects/$PROJECTNAME/$PROJECTNAME-blue/app
 sudo rm -rf /data/projects/$PROJECTNAME/$PROJECTNAME-green/app
 sudo git clone --recursive https://github.com/jrgp/linfo.git /data/projects/$PROJECTNAME/$PROJECTNAME-blue/app/
@@ -75,3 +72,6 @@ sudo echo "cd /etc/nginx/" > /data/projects/$PROJECTNAME/scripts/go-blue.sh
 sudo echo "yes | cp  nginx-green.conf nginx.conf" >> /data/projects/$PROJECTNAME/scripts/go-blue.sh
 sudo echo "service restart nginx" >> /data/projects/$PROJECTNAME/scripts/go-blue.sh
 sudo chmod +x /data/projects/$PROJECTNAME/scripts/go-blue.sh
+sudo service restart nginx
+cd /data/projects/$PROJECTNAME/$PROJECTNAME-green/ && sudo docker-compose restart
+cd /data/projects/$PROJECTNAME/$PROJECTNAME-blue/ && sudo docker-compose restart
