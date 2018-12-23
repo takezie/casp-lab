@@ -6,6 +6,7 @@ BLUEHTTPSPORT="8441"
 GREENHTTPSPORT="8442"
 BLUESSHPORT="8023"
 GREENSSHPORT="8024"
+reset
 echo "========Please provide additional info========"
 read -p 'Set hostname for this host: ' HOSTNAME
 read -p 'Set project name for new project: ' PROJECTNAME
