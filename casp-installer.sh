@@ -6,14 +6,6 @@ BLUEHTTPSPORT="8441"
 GREENHTTPSPORT="8442"
 BLUESSHPORT="8023"
 GREENSSHPORT="8024"
-read -p 'Set hostname for this host: ' HOSTNAME
-read -p 'Set project name for new project: ' PROJECTNAME
-if [[ -z "$HOSTNAME" ]]; then
-HOSTNAME="master"
-fi
-if [[ -z "$PROJECTNAME" ]]; then
-PROJECTNAME="hyze"
-fi
 sudo setenforce 0
 sudo sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
 sudo /etc/init.d/network restart
