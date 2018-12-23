@@ -6,7 +6,6 @@ BLUEHTTPSPORT="8441"
 GREENHTTPSPORT="8442"
 BLUESSHPORT="8023"
 GREENSSHPORT="8024"
-clear
 echo "========Please provide additional info========"
 read -p 'Set hostname for this host: ' HOSTNAME
 read -p 'Set project name for new project: ' PROJECTNAME
@@ -31,7 +30,7 @@ sudo pip install docker-compose
 sudo systemctl enable docker && sudo systemctl start docker
 sudo systemctl enable nginx && sudo systemctl start nginx
 sudo mkdir -p /data/projects/$PROJECTNAME/scripts
-sudo chmod 666 /data/projects/$PROJECTNAME/scripts
+sudo chmod 777 /data/projects/$PROJECTNAME/scripts
 sleep 1
 sudo git clone --recursive https://github.com/takezie/docker-recipes.git /data/projects/$PROJECTNAME/$PROJECTNAME-blue
 sudo git clone --recursive https://github.com/takezie/docker-recipes.git /data/projects/$PROJECTNAME/$PROJECTNAME-green
@@ -72,6 +71,7 @@ sudo echo "cd /etc/nginx/" > /data/projects/$PROJECTNAME/scripts/go-blue.sh
 sudo echo "yes | cp  nginx-green.conf nginx.conf" >> /data/projects/$PROJECTNAME/scripts/go-blue.sh
 sudo echo "service restart nginx" >> /data/projects/$PROJECTNAME/scripts/go-blue.sh
 sudo chmod +x /data/projects/$PROJECTNAME/scripts/go-blue.sh
-sudo service restart nginx
+sudo chmod 755 /data/projects/$PROJECTNAME/scripts
+sudo service nginx restart
 cd /data/projects/$PROJECTNAME/$PROJECTNAME-green/ && sudo docker-compose restart
 cd /data/projects/$PROJECTNAME/$PROJECTNAME-blue/ && sudo docker-compose restart
