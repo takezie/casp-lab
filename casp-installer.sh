@@ -21,7 +21,7 @@ sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
 sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
 sudo sysctl -p
 sudo hostnamectl set-hostname $HOSTNAME
-sudo { hostname --ip-address ; echo $HOSTNAME ; } | sed ':a;N;s/\n/ /;ba' >> /etc/hosts;
+sudo bash -c "{ hostname --ip-address ; echo $HOSTNAME ; } | sed ':a;N;s/\n/ /;ba' >> /etc/hosts"
 sudo yum -y update
 sudo yum -y install nano wget curl net-tools lsof bash-completion yum-utils device-mapper-persistent-data lvm2 docker epel-release python-pip nginx git
 sudo yum upgrade python*
