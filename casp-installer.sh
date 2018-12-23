@@ -66,11 +66,11 @@ sudo sed -i --follow-symlinks "s/"4a8fd6"/"4ad64a"/g" /data/projects/$PROJECTNAM
 sudo sed -i --follow-symlinks "s/"5c9ada"/"5cda5c"/g" /data/projects/$PROJECTNAME/$PROJECTNAME-green/app/layout/theme_default.css
 sudo echo "cd /etc/nginx/" > /data/projects/$PROJECTNAME/scripts/go-green.sh
 sudo echo "yes | cp  nginx-green.conf nginx.conf" >> /data/projects/$PROJECTNAME/scripts/go-green.sh
-sudo echo "service restart nginx" >> /data/projects/$PROJECTNAME/scripts/go-green.sh
+sudo echo "service nginx restart" >> /data/projects/$PROJECTNAME/scripts/go-green.sh
 sudo chmod +x /data/projects/$PROJECTNAME/scripts/go-green.sh
 sudo echo "cd /etc/nginx/" > /data/projects/$PROJECTNAME/scripts/go-blue.sh
 sudo echo "yes | cp  nginx-green.conf nginx.conf" >> /data/projects/$PROJECTNAME/scripts/go-blue.sh
-sudo echo "service restart nginx" >> /data/projects/$PROJECTNAME/scripts/go-blue.sh
+sudo echo "service nginx restart" >> /data/projects/$PROJECTNAME/scripts/go-blue.sh
 sudo chmod +x /data/projects/$PROJECTNAME/scripts/go-blue.sh
 sudo chmod 755 /data/projects/$PROJECTNAME/scripts
 sudo service nginx restart
